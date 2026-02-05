@@ -9,13 +9,11 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            
             <th>Titre</th>
             <th>Surface</th>
             <th>Prix</th>
             <th>Ville</th>
             <th class="text-end">Actions</th>
-            
         </tr>
     </thead>
     <tbody>
@@ -29,14 +27,11 @@
                 <a href="{{route('admin.property.edit', $property->id)}}">Modifier</a>
                 <a href="{{route('admin.property.destroy', $property->id)}}">Supprimer</a>
             </td>
-        <td>
-            <t>
-       
+        </tr>
         @endforeach
-        </tbody>
+    </tbody>
 </table>
+
 {{$properties->links()}}
-
-
 
 @endsection
