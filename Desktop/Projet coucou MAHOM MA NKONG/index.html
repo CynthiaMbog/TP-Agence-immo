@@ -1,0 +1,2406 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MAHOL MA NKONG – Mémoire, identité et prospérité du peuple Basa'a</title>
+  <meta name="description" content="Plateforme culturelle et économique du peuple Basa'a – Mbene, Mpo'o, Bati. Mémoire, identité, patrimoine et prospérité." />
+
+  <!-- ==============================
+       POLICES GOOGLE FONTS
+  ============================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       VARIABLES CSS – CHARTE GRAPHIQUE MAHOL MA NKONG
+    ============================================================ */
+    :root {
+      --vert-foret:    #1a3d2b;
+      --vert-moyen:    #245c3e;
+      --vert-clair:    #4a8c63;
+      --vert-pale:     #c5dbc9;
+      --marron:        #5a3220;
+      --marron-clair:  #9c6b4e;
+      --marron-pale:   #e8d5c4;
+      --bleu:          #2a6080;
+      --bleu-clair:    #5b9ab5;
+      --bleu-pale:     #c8dde8;
+      --creme:         #f7f3ee;
+      --blanc:         #ffffff;
+      --gris-texte:    #4a4a4a;
+      --gris-mid:      #7a7a7a;
+      --bordure:       rgba(26,61,43,0.12);
+      --ombre:         0 8px 40px rgba(26,61,43,0.10);
+      --ombre-forte:   0 20px 60px rgba(26,61,43,0.18);
+
+      --serif:   'Playfair Display', Georgia, serif;
+      --sans:    'DM Sans', sans-serif;
+
+      --transition:    cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --transition-lente: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--creme);
+      color: var(--gris-texte);
+      overflow-x: hidden;
+      line-height: 1.75;
+    }
+
+    img { display: block; max-width: 100%; }
+    a   { color: inherit; text-decoration: none; }
+    button { font-family: var(--sans); cursor: pointer; border: none; outline: none; }
+    ul { list-style: none; }
+
+    /* ============================================================
+       ANIMATIONS AU SCROLL
+    ============================================================ */
+    .apparition {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.85s var(--transition-lente),
+                  transform 0.85s var(--transition-lente);
+    }
+    .apparition.visible { opacity: 1; transform: translateY(0); }
+    .retard-1 { transition-delay: 0.10s; }
+    .retard-2 { transition-delay: 0.20s; }
+    .retard-3 { transition-delay: 0.30s; }
+    .retard-4 { transition-delay: 0.40s; }
+    .retard-5 { transition-delay: 0.50s; }
+
+    /* ============================================================
+       NAVIGATION
+    ============================================================ */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 5rem;
+      transition: background 0.45s var(--transition),
+                  box-shadow 0.45s;
+    }
+
+    #nav.defilé {
+      background: rgba(247, 243, 238, 0.95);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 1px 0 var(--bordure);
+    }
+
+    /* Logo */
+    .logo-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .logo-img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      border-radius: 50%;
+      transition: transform 0.3s;
+    }
+    .logo-img:hover { transform: rotate(-5deg) scale(1.08); }
+
+    /* Logo SVG de remplacement si l'image ne charge pas */
+    .logo-svg-fallback {
+      width: 48px;
+      height: 48px;
+      display: none;
+    }
+
+    .logo-texte {
+      line-height: 1.2;
+    }
+    .logo-nom {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--vert-foret);
+      letter-spacing: 0.04em;
+    }
+    .logo-sous {
+      font-size: 0.62rem;
+      font-weight: 400;
+      color: var(--marron-clair);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    /* Liens navigation */
+    .nav-liens {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+    .nav-liens li a {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--vert-foret);
+      position: relative;
+      padding-bottom: 3px;
+      transition: color 0.25s;
+    }
+    .nav-liens li a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: 0; right: 100%;
+      height: 1px;
+      background: var(--marron-clair);
+      transition: right 0.35s var(--transition);
+    }
+    .nav-liens li a:hover { color: var(--marron); }
+    .nav-liens li a:hover::after { right: 0; }
+
+    /* Bouton burger mobile */
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      background: none;
+      padding: 4px;
+    }
+    .burger span {
+      display: block;
+      width: 26px; height: 2px;
+      background: var(--vert-foret);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* Menu mobile */
+    .menu-mobile {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: var(--creme);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+    .menu-mobile.ouvert { display: flex; }
+    .menu-mobile a {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      font-weight: 400;
+      color: var(--vert-foret);
+      transition: color 0.25s;
+    }
+    .menu-mobile a:hover { color: var(--marron); }
+    .fermer-menu {
+      position: absolute;
+      top: 1.5rem; right: 2rem;
+      font-size: 2rem;
+      color: var(--vert-foret);
+      background: none;
+    }
+
+    /* ============================================================
+       BOUTONS
+    ============================================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.9rem 2.4rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      border-radius: 0;
+      transition: all 0.3s var(--transition);
+      cursor: pointer;
+    }
+    .btn-primaire {
+      background: var(--marron-clair);
+      color: var(--blanc);
+      border: 2px solid var(--marron-clair);
+    }
+    .btn-primaire:hover {
+      background: var(--marron);
+      border-color: var(--marron);
+      transform: translateY(-2px);
+    }
+    .btn-contour {
+      background: transparent;
+      color: var(--blanc);
+      border: 2px solid rgba(255,255,255,0.55);
+    }
+    .btn-contour:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: var(--blanc);
+    }
+    .btn-vert {
+      background: var(--vert-foret);
+      color: var(--blanc);
+      border: 2px solid var(--vert-foret);
+    }
+    .btn-vert:hover {
+      background: var(--vert-moyen);
+      border-color: var(--vert-moyen);
+      transform: translateY(-2px);
+    }
+
+    /* ============================================================
+       ELEMENTS COMMUNS
+    ============================================================ */
+    .conteneur {
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+
+    .etiquette-section {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--marron-clair);
+      margin-bottom: 1rem;
+    }
+
+    .titre-section {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 600;
+      line-height: 1.12;
+      color: var(--vert-foret);
+      margin-bottom: 1.5rem;
+    }
+    .titre-section em {
+      font-style: italic;
+      color: var(--marron-clair);
+    }
+
+    .figure-intro {
+      max-width: 80ch;
+      margin-bottom: 1.75rem;
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--gris-texte);
+    }
+
+    .figure-lien {
+      margin-bottom: 2.5rem;
+    }
+
+    .separateur {
+      width: 56px;
+      height: 2px;
+      background: linear-gradient(to right, var(--marron-clair), var(--vert-clair));
+      margin-bottom: 2.5rem;
+    }
+
+    /* ============================================================
+       SECTION HÉROS
+    ============================================================ */
+    #accueil {
+      position: relative;
+      height: 100vh;
+      min-height: 620px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Fond artistique SVG animé */
+    .heros-fond {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .heros-fond-svg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .heros-superposition {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        155deg,
+        rgba(26,61,43,0.90) 0%,
+        rgba(36,92,62,0.78) 45%,
+        rgba(42,96,128,0.65) 100%
+      );
+      z-index: 1;
+    }
+
+    /* Particules décoratives */
+    .heros-particules {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .particule {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.06;
+      animation: flotterParticule linear infinite;
+    }
+
+    @keyframes flotterParticule {
+      0%   { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10%  { opacity: 0.06; }
+      90%  { opacity: 0.06; }
+      100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
+    }
+
+    /* Contenu héros */
+    .heros-contenu {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      color: var(--blanc);
+      padding: 0 2rem;
+      max-width: 880px;
+    }
+
+    .heros-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.45rem 1.2rem;
+      border: 1px solid rgba(255,255,255,0.25);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: apparaitreHaut 1s 0.3s var(--transition-lente) forwards;
+    }
+    .heros-badge-point {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--marron-pale);
+    }
+
+    .heros-titre {
+      font-family: var(--serif);
+      font-size: clamp(3.2rem, 9vw, 7.5rem);
+      font-weight: 700;
+      line-height: 0.98;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+      opacity: 0;
+      animation: apparaitreHaut 1s 0.5s var(--transition-lente) forwards;
+    }
+    .heros-titre-italic {
+      font-style: italic;
+      color: var(--bleu-pale);
+      font-weight: 400;
+    }
+
+    .heros-slogan {
+      font-size: clamp(0.9rem, 2.2vw, 1.15rem);
+      font-weight: 300;
+      color: rgba(255,255,255,0.82);
+      letter-spacing: 0.03em;
+      max-width: 600px;
+      margin: 1.8rem auto 3rem;
+      opacity: 0;
+      animation: apparaitreHaut 1s 0.7s var(--transition-lente) forwards;
+    }
+
+    .heros-boutons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: apparaitreHaut 1s 0.9s var(--transition-lente) forwards;
+    }
+
+    /* Indicateur de défilement */
+    .defilement-indicateur {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      color: rgba(255,255,255,0.55);
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: apparaitreHaut 1s 1.2s var(--transition-lente) forwards;
+    }
+    .ligne-defilement {
+      width: 1px;
+      height: 52px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.55), transparent);
+      animation: pulseLigne 2.2s ease-in-out infinite;
+    }
+    @keyframes pulseLigne {
+      0%, 100% { opacity: 0.55; transform: scaleY(1); }
+      50%       { opacity: 0.25; transform: scaleY(0.65); }
+    }
+
+    @keyframes apparaitreHaut {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================
+       SECTION HISTOIRE
+    ============================================================ */
+    #histoire {
+      padding: 9rem 0;
+      background: var(--blanc);
+    }
+
+    .histoire-entete {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: end;
+      margin-bottom: 6rem;
+    }
+
+    .histoire-intro p {
+      font-size: 1.05rem;
+      color: var(--gris-mid);
+      font-weight: 300;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .histoire-intro strong { color: var(--vert-foret); font-weight: 600; }
+
+    .histoire-chiffres {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .chiffre-item {
+      padding: 1.5rem;
+      border-left: 3px solid var(--vert-pale);
+      background: var(--creme);
+    }
+    .chiffre-nombre {
+      font-family: var(--serif);
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--vert-foret);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .chiffre-libelle {
+      font-size: 0.78rem;
+      color: var(--gris-mid);
+      font-weight: 400;
+      letter-spacing: 0.05em;
+    }
+
+    /* Timeline horizontale */
+    .timeline-conteneur {
+      position: relative;
+      padding: 3rem 0;
+    }
+    .timeline-axe {
+      position: absolute;
+      left: 0; right: 0;
+      top: 50%;
+      height: 2px;
+      background: linear-gradient(to right,
+        var(--vert-foret), var(--bleu-clair), var(--marron-clair));
+      transform: translateY(-50%);
+      z-index: 0;
+    }
+    .timeline-items {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+    .timeline-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    /* Alterné : haut / bas */
+    .timeline-item:nth-child(odd) { flex-direction: column; }
+    .timeline-item:nth-child(even) { flex-direction: column-reverse; }
+
+    .timeline-contenu {
+      background: var(--blanc);
+      border: 1px solid var(--bordure);
+      padding: 1.25rem;
+      text-align: center;
+      box-shadow: var(--ombre);
+      transition: transform 0.3s var(--transition), box-shadow 0.3s;
+      max-width: 200px;
+    }
+    .timeline-contenu:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--ombre-forte);
+    }
+    .timeline-date {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--bleu);
+      margin-bottom: 0.5rem;
+    }
+    .timeline-titre {
+      font-family: var(--serif);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--vert-foret);
+      margin-bottom: 0.4rem;
+      line-height: 1.3;
+    }
+    .timeline-texte {
+      font-size: 0.75rem;
+      color: var(--gris-mid);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+    .timeline-point {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: var(--marron-clair);
+      border: 3px solid var(--blanc);
+      box-shadow: 0 0 0 2px var(--marron-clair);
+      flex-shrink: 0;
+    }
+
+    /* Régions actuelles */
+    .regions-titre {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--vert-foret);
+      text-align: center;
+      margin: 5rem 0 3rem;
+    }
+    .regions-grille {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .region-carte {
+      padding: 2rem;
+      border: 1px solid var(--bordure);
+      background: var(--creme);
+      text-align: center;
+      transition: all 0.3s var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .region-carte::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(to right, var(--vert-foret), var(--bleu-clair));
+      transform: scaleX(0);
+      transition: transform 0.35s var(--transition);
+    }
+    .region-carte:hover { transform: translateY(-5px); box-shadow: var(--ombre); }
+    .region-carte:hover::before { transform: scaleX(1); }
+    .region-icone { font-size: 2.2rem; margin-bottom: 0.8rem; }
+    .region-nom {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--vert-foret);
+      margin-bottom: 0.4rem;
+    }
+    .region-desc { font-size: 0.8rem; color: var(--gris-mid); font-weight: 300; }
+
+    /* ============================================================
+       SECTION PLATEFORME
+    ============================================================ */
+    #plateforme {
+      padding: 9rem 0;
+      background: var(--vert-foret);
+      color: var(--blanc);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Motif décoratif de fond */
+    #plateforme::before {
+      content: '';
+      position: absolute;
+      right: -10%;
+      top: -10%;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      border: 80px solid rgba(255,255,255,0.03);
+    }
+    #plateforme::after {
+      content: '';
+      position: absolute;
+      left: -5%;
+      bottom: -10%;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      border: 60px solid rgba(255,255,255,0.03);
+    }
+
+    #plateforme .titre-section { color: var(--blanc); }
+    #plateforme .etiquette-section { color: var(--vert-pale); }
+    #plateforme .separateur {
+      background: linear-gradient(to right, var(--bleu-clair), var(--vert-pale));
+    }
+
+    .plateforme-en-tete {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+      margin-bottom: 5rem;
+    }
+    .plateforme-intro {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.85;
+    }
+
+    .mvision {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .mvision-bloc {
+      padding: 2rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: background 0.3s;
+    }
+    .mvision-bloc:hover { background: rgba(255,255,255,0.1); }
+    .mvision-titre {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--vert-pale);
+      margin-bottom: 0.6rem;
+    }
+    .mvision-texte {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.65);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* Cartes objectifs */
+    .objectifs-grille {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+      gap: 2px;
+    }
+    .objectif-carte {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      padding: 2.8rem 2.2rem;
+      transition: background 0.3s, transform 0.35s var(--transition-lente);
+      position: relative;
+      overflow: hidden;
+    }
+    .objectif-carte::before {
+      content: attr(data-num);
+      position: absolute;
+      right: 1.5rem; top: 1.5rem;
+      font-family: var(--serif);
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.05);
+      line-height: 1;
+    }
+    .objectif-carte:hover {
+      background: rgba(255,255,255,0.09);
+      transform: translateY(-5px);
+    }
+    .objectif-icone {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .ic-vert   { background: rgba(74,140,99,0.3); }
+    .ic-marron { background: rgba(156,107,78,0.3); }
+    .ic-bleu   { background: rgba(91,154,181,0.3); }
+    .ic-or     { background: rgba(200,180,120,0.3); }
+
+    .objectif-carte h3 {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--blanc);
+      margin-bottom: 0.8rem;
+    }
+    .objectif-carte p {
+      font-size: 0.87rem;
+      color: rgba(255,255,255,0.62);
+      font-weight: 300;
+      line-height: 1.78;
+    }
+
+    /* ============================================================
+       SECTION FIGURES REMARQUABLES
+    ============================================================ */
+    #figures {
+      padding: 9rem 0;
+      background: var(--creme);
+    }
+
+    /* Onglets catégories */
+    .onglets {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid var(--bordure);
+      margin-bottom: 3rem;
+    }
+    .onglet-btn {
+      padding: 0.85rem 2.2rem;
+      background: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gris-mid);
+      position: relative;
+      transition: color 0.25s;
+    }
+    .onglet-btn::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 2px;
+      background: var(--marron-clair);
+      transform: scaleX(0);
+      transition: transform 0.35s var(--transition);
+    }
+    .onglet-btn.actif { color: var(--vert-foret); }
+    .onglet-btn.actif::after { transform: scaleX(1); }
+
+    /* Barre de filtres */
+    .barre-filtres {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+      align-items: center;
+    }
+    .filtre-groupe {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .filtre-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gris-mid);
+    }
+    .filtre-btn {
+      padding: 0.38rem 1rem;
+      background: transparent;
+      border: 1.5px solid var(--bordure);
+      font-family: var(--sans);
+      font-size: 0.73rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--gris-texte);
+      border-radius: 2px;
+      transition: all 0.25s;
+    }
+    .filtre-btn:hover,
+    .filtre-btn.actif {
+      background: var(--vert-foret);
+      color: var(--blanc);
+      border-color: var(--vert-foret);
+    }
+
+    /* Grille de profils */
+    .profils-grille {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 2rem;
+    }
+    .profil-carte {
+      background: var(--blanc);
+      border: 1px solid var(--bordure);
+      overflow: hidden;
+      transition: transform 0.4s var(--transition-lente),
+                  box-shadow 0.4s;
+      position: relative;
+    }
+    .profil-carte:hover {
+      transform: translateY(-7px);
+      box-shadow: var(--ombre-forte);
+    }
+    .profil-carte[data-masque="true"] { display: none; }
+
+    .profil-img-conteneur {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 3/3.4;
+      background: linear-gradient(135deg, var(--vert-pale), var(--bleu-pale));
+    }
+    .profil-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      filter: grayscale(15%);
+      transition: filter 0.45s, transform 0.55s var(--transition-lente);
+    }
+    .profil-carte:hover .profil-img {
+      filter: grayscale(0%);
+      transform: scale(1.06);
+    }
+
+    /* Avatar SVG si pas d'image */
+    .profil-avatar {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 4rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .profil-badge {
+      position: absolute;
+      top: 1rem; left: 1rem;
+      padding: 0.28rem 0.8rem;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      z-index: 1;
+      border-radius: 2px;
+    }
+    .badge-historique  { background: var(--marron-clair); color: var(--blanc); }
+    .badge-contemporain { background: var(--vert-foret);  color: var(--blanc); }
+
+    .profil-corps {
+      padding: 1.6rem;
+    }
+    .profil-nom {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--vert-foret);
+      margin-bottom: 0.25rem;
+    }
+    .profil-metier {
+      font-size: 0.78rem;
+      color: var(--marron-clair);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.4rem;
+    }
+    .profil-localisation {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.75rem;
+      color: var(--gris-mid);
+      margin-bottom: 0.8rem;
+    }
+    .profil-tag {
+      display: inline-block;
+      padding: 0.2rem 0.65rem;
+      background: var(--vert-pale);
+      color: var(--vert-foret);
+      font-size: 0.63rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      margin-bottom: 0.9rem;
+    }
+    .profil-desc {
+      font-size: 0.84rem;
+      color: var(--gris-mid);
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: 1.3rem;
+    }
+    .btn-contact-sm {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.48rem 1.2rem;
+      border: 1.5px solid var(--vert-foret);
+      background: transparent;
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--vert-foret);
+      border-radius: 2px;
+      transition: all 0.25s;
+    }
+    .btn-contact-sm:hover {
+      background: var(--vert-foret);
+      color: var(--blanc);
+    }
+
+    /* Message aucun résultat */
+    .aucun-resultat {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 5rem 2rem;
+      color: var(--gris-mid);
+    }
+    .aucun-resultat-icone { font-size: 3rem; margin-bottom: 1rem; }
+
+    /* ============================================================
+       SECTION CONTACT
+    ============================================================ */
+    #contact {
+      padding: 9rem 0;
+      background: var(--blanc);
+    }
+
+    .contact-grille {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 7rem;
+      align-items: start;
+    }
+
+    .contact-info h3 {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--vert-foret);
+      margin-bottom: 1rem;
+    }
+    .contact-info p {
+      font-size: 0.92rem;
+      color: var(--gris-mid);
+      font-weight: 300;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+    }
+
+    .liens-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .lien-contact {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.9rem;
+      color: var(--gris-texte);
+      transition: color 0.25s;
+    }
+    .lien-contact:hover { color: var(--vert-foret); }
+    .lien-icone {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      transition: transform 0.25s;
+    }
+    .lien-contact:hover .lien-icone { transform: scale(1.1); }
+    .li-vert   { background: var(--vert-pale);  color: var(--vert-foret); }
+    .li-bleu   { background: var(--bleu-pale);  color: var(--bleu); }
+    .li-wa     { background: #dcf8c6; color: #128c7e; }
+    .li-fb     { background: #dde8f7; color: #1877f2; }
+
+    /* Formulaire */
+    .formulaire {
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+    }
+    .form-ligne {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.4rem;
+    }
+    .form-groupe {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+    .form-groupe label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gris-mid);
+    }
+    .form-groupe input,
+    .form-groupe select,
+    .form-groupe textarea {
+      padding: 0.9rem 1.1rem;
+      border: 1.5px solid var(--bordure);
+      background: var(--creme);
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      color: var(--gris-texte);
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 0.25s, background 0.25s;
+      resize: vertical;
+    }
+    .form-groupe input:focus,
+    .form-groupe select:focus,
+    .form-groupe textarea:focus {
+      border-color: var(--vert-foret);
+      background: var(--blanc);
+    }
+    .form-groupe textarea { min-height: 130px; }
+
+    .message-succes {
+      display: none;
+      background: var(--vert-pale);
+      color: var(--vert-foret);
+      padding: 1.1rem 1.5rem;
+      border-radius: 2px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-left: 3px solid var(--vert-foret);
+    }
+
+    /* ============================================================
+       PIED DE PAGE
+    ============================================================ */
+    footer {
+      background: #111;
+      color: rgba(255,255,255,0.6);
+      padding: 5rem 0 2.5rem;
+    }
+
+    .footer-grille {
+      display: grid;
+      grid-template-columns: 2.2fr 1fr 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 4rem;
+      padding-bottom: 4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .footer-marque-nom {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--blanc);
+      margin-bottom: 0.75rem;
+    }
+    .footer-marque p {
+      font-size: 0.85rem;
+      font-weight: 300;
+      line-height: 1.8;
+      max-width: 300px;
+      margin-bottom: 1.5rem;
+    }
+
+    .reseaux-sociaux {
+      display: flex;
+      gap: 0.7rem;
+    }
+    .lien-social {
+      width: 38px; height: 38px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      transition: all 0.25s;
+    }
+    .lien-social:hover {
+      background: var(--vert-foret);
+      border-color: var(--vert-foret);
+      color: var(--blanc);
+      transform: translateY(-2px);
+    }
+
+    .footer-col h4 {
+      font-size: 0.67rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--vert-pale);
+      margin-bottom: 1.5rem;
+    }
+    .footer-col ul li { margin-bottom: 0.7rem; }
+    .footer-col ul li a {
+      font-size: 0.84rem;
+      font-weight: 300;
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: var(--blanc); }
+
+    .footer-bas {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.78rem;
+      font-weight: 300;
+    }
+
+    /* ============================================================
+       BOUTON WHATSAPP FLOTTANT
+    ============================================================ */
+    .whatsapp-flottant {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 998;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      background: radial-gradient(circle at top left, #6af18c, #25d366 40%, #128c7e 100%);
+      color: #fff;
+      padding: 0;
+      border-radius: 50%;
+      box-shadow: 0 12px 32px rgba(37,211,102,0.30), inset 0 0 0 1px rgba(255,255,255,0.15);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      text-decoration: none;
+    }
+    .whatsapp-flottant:hover {
+      transform: translateY(-4px) scale(1.06);
+      box-shadow: 0 18px 40px rgba(37,211,102,0.55), inset 0 0 0 1px rgba(255,255,255,0.18);
+    }
+    .wa-icone {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+    }
+    .whatsapp-flottant svg {
+      width: 28px;
+      height: 28px;
+      color: #fff;
+    }
+
+    /* Pulse autour du bouton WA */
+    .whatsapp-flottant::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 2px solid rgba(37,211,102,0.55);
+      animation: pulsWA 2.4s ease-out infinite;
+    }
+    @keyframes pulsWA {
+      0%   { transform: scale(1); opacity: 0.6; }
+      50%  { transform: scale(1.15); opacity: 0.25; }
+      100% { transform: scale(1.3); opacity: 0; }
+    }
+
+    /* ============================================================
+       RESPONSIVE – TABLETTE & MOBILE
+    ============================================================ */
+    @media (max-width: 1100px) {
+      #nav { padding: 1.2rem 2rem; }
+      .nav-liens { display: none; }
+      .burger { display: flex; }
+
+      .histoire-entete { grid-template-columns: 1fr; gap: 3rem; }
+      .plateforme-en-tete { grid-template-columns: 1fr; gap: 3rem; }
+      .contact-grille { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-grille { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+
+      .timeline-items { grid-template-columns: repeat(3, 1fr); }
+      .timeline-axe { display: none; }
+    }
+
+    @media (max-width: 720px) {
+      .heros-boutons { flex-direction: column; align-items: center; }
+      .form-ligne { grid-template-columns: 1fr; }
+      .profils-grille { grid-template-columns: 1fr; }
+      .objectifs-grille { grid-template-columns: 1fr; }
+      .timeline-items { grid-template-columns: 1fr 1fr; }
+      .footer-grille { grid-template-columns: 1fr; }
+      .whatsapp-flottant { width: 54px; height: 54px; padding: 0; border-radius: 50%; }
+      .barre-filtres { flex-direction: column; align-items: flex-start; }
+      .mvision { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .timeline-items { grid-template-columns: 1fr; }
+      .histoire-chiffres { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION PRINCIPALE
+  ============================================================ -->
+  <nav id="nav">
+    <div class="logo-wrapper">
+      <img
+        src="MAHOL_MA_NKONG.png"
+        alt="Logo Mahol Ma Nkong"
+        class="logo-img"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+      />
+      <!-- SVG de secours si l'image ne charge pas -->
+      <svg class="logo-svg-fallback" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="24" fill="#1a3d2b"/>
+        <text x="24" y="32" text-anchor="middle" font-size="22" fill="#c5dbc9" font-family="Georgia,serif" font-weight="700">M</text>
+      </svg>
+      <div class="logo-texte">
+        <div class="logo-nom">MAHOL MA NKONG</div>
+        <div class="logo-sous">Mbene · Mpo'o · Bati</div>
+      </div>
+    </div>
+
+    <ul class="nav-liens" role="navigation" aria-label="Navigation principale">
+      <li><a href="#accueil">Accueil</a></li>
+      <li><a href="#histoire">Histoire</a></li>
+      <li><a href="#plateforme">La Plateforme</a></li>
+      <li><a href="#figures">Héritage & Leadership</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <button class="burger" aria-label="Menu" onclick="ouvrirMenuMobile()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Menu mobile -->
+  <div class="menu-mobile" id="menuMobile" role="dialog" aria-label="Menu mobile">
+    <button class="fermer-menu" onclick="fermerMenuMobile()" aria-label="Fermer">×</button>
+    <a href="#accueil"    onclick="fermerMenuMobile()">Accueil</a>
+    <a href="#histoire"   onclick="fermerMenuMobile()">Histoire</a>
+    <a href="#plateforme" onclick="fermerMenuMobile()">La Plateforme</a>
+    <a href="#figures"    onclick="fermerMenuMobile()">Héritage & Leadership</a>
+    <a href="#contact"    onclick="fermerMenuMobile()">Contact</a>
+  </div>
+
+  <!-- ============================================================
+       SECTION HÉROS – ACCUEIL
+  ============================================================ -->
+  <section id="accueil" aria-label="Page d'accueil">
+
+    <!-- Fond SVG artistique -->
+    <div class="heros-fond" aria-hidden="true">
+      <svg
+        class="heros-fond-svg"
+        viewBox="0 0 1440 900"
+        preserveAspectRatio="xMidYMid slice"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <!-- Dégradé de fond -->
+        <defs>
+          <linearGradient id="fondGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#0f2819"/>
+            <stop offset="50%"  stop-color="#1a3d2b"/>
+            <stop offset="100%" stop-color="#1e4a6b"/>
+          </linearGradient>
+          <radialGradient id="lueur1" cx="30%" cy="60%" r="40%">
+            <stop offset="0%"   stop-color="#2a6080" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="transparent"/>
+          </radialGradient>
+          <radialGradient id="lueur2" cx="75%" cy="30%" r="35%">
+            <stop offset="0%"   stop-color="#4a8c63" stop-opacity="0.25"/>
+            <stop offset="100%" stop-color="transparent"/>
+          </radialGradient>
+        </defs>
+
+        <!-- Fond principal -->
+        <rect width="1440" height="900" fill="url(#fondGrad)"/>
+        <rect width="1440" height="900" fill="url(#lueur1)"/>
+        <rect width="1440" height="900" fill="url(#lueur2)"/>
+
+        <!-- Arbre stylisé – tronc -->
+        <path d="M720 900 L720 350" stroke="#3a2215" stroke-width="40" stroke-linecap="round" opacity="0.5"/>
+        <!-- Racines -->
+        <path d="M720 800 Q600 840 480 870" stroke="#3a2215" stroke-width="18" fill="none" stroke-linecap="round" opacity="0.4"/>
+        <path d="M720 800 Q840 840 960 870" stroke="#3a2215" stroke-width="18" fill="none" stroke-linecap="round" opacity="0.4"/>
+        <path d="M720 850 Q700 870 640 880" stroke="#3a2215" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.35"/>
+        <path d="M720 850 Q740 870 800 880" stroke="#3a2215" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.35"/>
+
+        <!-- Branches -->
+        <path d="M720 420 Q580 340 440 280" stroke="#3a2215" stroke-width="24" fill="none" stroke-linecap="round" opacity="0.5"/>
+        <path d="M720 420 Q860 340 1000 280" stroke="#3a2215" stroke-width="24" fill="none" stroke-linecap="round" opacity="0.5"/>
+        <path d="M720 500 Q630 430 540 380" stroke="#3a2215" stroke-width="16" fill="none" stroke-linecap="round" opacity="0.4"/>
+        <path d="M720 500 Q810 430 900 380" stroke="#3a2215" stroke-width="16" fill="none" stroke-linecap="round" opacity="0.4"/>
+        <path d="M720 350 Q710 240 700 120" stroke="#3a2215" stroke-width="18" fill="none" stroke-linecap="round" opacity="0.45"/>
+        <!-- Sous-branches -->
+        <path d="M440 280 Q380 240 320 200" stroke="#3a2215" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.35"/>
+        <path d="M440 280 Q410 230 400 170" stroke="#3a2215" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.3"/>
+        <path d="M1000 280 Q1060 240 1120 200" stroke="#3a2215" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.35"/>
+        <path d="M1000 280 Q1030 230 1040 170" stroke="#3a2215" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.3"/>
+
+        <!-- Feuillages -->
+        <circle cx="440"  cy="270" r="88"  fill="#1e4d32" opacity="0.5"/>
+        <circle cx="1000" cy="270" r="88"  fill="#1e4d32" opacity="0.5"/>
+        <circle cx="540"  cy="370" r="60"  fill="#24573b" opacity="0.45"/>
+        <circle cx="900"  cy="370" r="60"  fill="#24573b" opacity="0.45"/>
+        <circle cx="700"  cy="108" r="70"  fill="#1e4d32" opacity="0.5"/>
+        <circle cx="320"  cy="192" r="52"  fill="#245c3e" opacity="0.4"/>
+        <circle cx="1120" cy="192" r="52"  fill="#245c3e" opacity="0.4"/>
+        <circle cx="400"  cy="165" r="42"  fill="#1e4d32" opacity="0.38"/>
+        <circle cx="1040" cy="165" r="42"  fill="#1e4d32" opacity="0.38"/>
+
+        <!-- Rivière ondulée -->
+        <ellipse cx="720" cy="900" rx="580" ry="220" fill="#1e3d5c" opacity="0.5"/>
+        <ellipse cx="720" cy="900" rx="380" ry="140" fill="#2a5577" opacity="0.45"/>
+        <path d="M180 840 Q360 808 540 840 Q720 872 900 840 Q1080 808 1260 840" stroke="#5b9ab5" stroke-width="3" fill="none" opacity="0.45"/>
+        <path d="M100 870 Q300 835 500 868 Q700 900 900 868 Q1100 835 1300 868" stroke="#5b9ab5" stroke-width="2" fill="none" opacity="0.35"/>
+        <path d="M200 898 Q400 875 600 895 Q800 914 1000 895 Q1200 875 1440 898" stroke="#5b9ab5" stroke-width="1.5" fill="none" opacity="0.3"/>
+
+        <!-- Silhouettes humaines stylisées (6 figures) -->
+        <g opacity="0.12" fill="#a8c8b0">
+          <!-- Figure 1 – gauche haute -->
+          <circle cx="260" cy="180" r="20"/>
+          <path d="M260 200 Q240 250 220 290 Q250 280 280 290 Q290 250 260 200Z"/>
+          <!-- Figure 2 – gauche milieu -->
+          <circle cx="180" cy="400" r="16"/>
+          <path d="M180 416 Q163 458 148 490 Q173 482 198 490 Q204 458 180 416Z"/>
+          <!-- Figure 3 – gauche bas -->
+          <circle cx="300" cy="600" r="18"/>
+          <path d="M300 618 Q282 660 266 695 Q291 686 316 695 Q322 660 300 618Z"/>
+          <!-- Figure 4 – droite haute -->
+          <circle cx="1180" cy="180" r="20"/>
+          <path d="M1180 200 Q1160 250 1140 290 Q1170 280 1200 290 Q1210 250 1180 200Z"/>
+          <!-- Figure 5 – droite milieu -->
+          <circle cx="1260" cy="400" r="16"/>
+          <path d="M1260 416 Q1243 458 1228 490 Q1253 482 1278 490 Q1284 458 1260 416Z"/>
+          <!-- Figure 6 – droite bas -->
+          <circle cx="1140" cy="600" r="18"/>
+          <path d="M1140 618 Q1122 660 1106 695 Q1131 686 1156 695 Q1162 660 1140 618Z"/>
+        </g>
+
+        <!-- Étoiles / lucioles -->
+        <g opacity="0.35" fill="#c5dbc9">
+          <circle cx="150"  cy="100" r="1.5"/>
+          <circle cx="380"  cy="60"  r="1"/>
+          <circle cx="600"  cy="130" r="2"/>
+          <circle cx="850"  cy="80"  r="1.5"/>
+          <circle cx="1100" cy="120" r="1"/>
+          <circle cx="1300" cy="70"  r="2"/>
+          <circle cx="200"  cy="300" r="1"/>
+          <circle cx="1200" cy="320" r="1.5"/>
+          <circle cx="50"   cy="500" r="1"/>
+          <circle cx="1390" cy="450" r="1"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Superposition sombre -->
+    <div class="heros-superposition" aria-hidden="true"></div>
+
+    <!-- Particules flottantes -->
+    <div class="heros-particules" id="particules" aria-hidden="true"></div>
+
+    <!-- Contenu principal héros -->
+    <div class="heros-contenu">
+      <div class="heros-badge">
+        <div class="heros-badge-point"></div>
+        Peuple Basa'a · Cameroun · Diaspora
+        <div class="heros-badge-point"></div>
+      </div>
+
+      <h1 class="heros-titre">
+        MAHOL<br>
+        <span class="heros-titre-italic">MA NKONG</span>
+      </h1>
+
+      <p class="heros-slogan">
+        Mémoire, identité et prospérité du peuple Basa'a —<br>
+        Mbene · Mpo'o · Bati
+      </p>
+
+      <div class="heros-boutons">
+        <a href="#histoire" class="btn btn-primaire">Découvrir notre histoire</a>
+        <a href="#figures"  class="btn btn-contour">Nos personnalités</a>
+      </div>
+    </div>
+
+    <!-- Indicateur défilement -->
+    <div class="defilement-indicateur" aria-hidden="true">
+      <span>Défiler</span>
+      <div class="ligne-defilement"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION HISTOIRE
+  ============================================================ -->
+  <section id="histoire" aria-label="Histoire du peuple Basa'a">
+    <div class="conteneur">
+
+      <!-- En-tête histoire -->
+      <div class="histoire-entete">
+        <div class="apparition">
+          <div class="etiquette-section">Nos origines</div>
+          <h2 class="titre-section">
+            L'épopée d'un peuple<br><em>aux racines millénaires</em>
+          </h2>
+          <div class="separateur"></div>
+          <div class="histoire-intro">
+            <p>
+              Le peuple <strong>Basa'a</strong> est l'un des groupes ethniques
+              les plus anciens et les plus structurés du Cameroun. Héritiers d'une
+              civilisation dont les traditions orales remontent aux grandes
+              migrations de l'Afrique ancienne, les Basa'a portent en eux une
+              histoire profonde.
+            </p>
+            <p>
+              Répartis en trois grands ensembles — les <strong>Mbene</strong>,
+              les <strong>Mpo'o</strong> et les <strong>Bati</strong> — ils ont
+              forgé des alliances solides, résisté à la colonisation avec
+              bravoure, et contribué de manière décisive à la construction de
+              la nation camerounaise.
+            </p>
+          </div>
+        </div>
+
+        <div class="histoire-chiffres apparition retard-2">
+          <div class="chiffre-item">
+            <div class="chiffre-nombre">3 000+</div>
+            <div class="chiffre-libelle">Années d'histoire documentée</div>
+          </div>
+          <div class="chiffre-item">
+            <div class="chiffre-nombre">3</div>
+            <div class="chiffre-libelle">Grands groupes (Mbene, Mpo'o, Bati)</div>
+          </div>
+          <div class="chiffre-item">
+            <div class="chiffre-nombre">5+</div>
+            <div class="chiffre-libelle">Régions d'implantation au Cameroun</div>
+          </div>
+          <div class="chiffre-item">
+            <div class="chiffre-nombre">∞</div>
+            <div class="chiffre-libelle">Diaspora à travers le monde</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timeline – De l'Égypte à Ngog Lituba -->
+      <div class="apparition">
+        <h3 class="regions-titre" style="margin-top:0; margin-bottom:3rem;">
+          De l'Égypte à <em>Ngog Lituba</em>
+        </h3>
+      </div>
+
+      <div class="timeline-conteneur apparition retard-1">
+        <div class="timeline-axe" aria-hidden="true"></div>
+        <div class="timeline-items">
+
+          <div class="timeline-item">
+            <div class="timeline-contenu">
+              <div class="timeline-date">Antiquité</div>
+              <div class="timeline-titre">Origines du Nil</div>
+              <div class="timeline-texte">Les traditions orales évoquent une migration depuis la haute vallée du Nil et l'Afrique du Nord-Est.</div>
+            </div>
+            <div class="timeline-point"></div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-point"></div>
+            <div class="timeline-contenu">
+              <div class="timeline-date">Migrations</div>
+              <div class="timeline-titre">Traversée du continent</div>
+              <div class="timeline-texte">Long périple à travers l'Afrique centrale, marqué par des alliances et des rencontres inter-ethniques.</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-contenu">
+              <div class="timeline-date">~3 000 ans</div>
+              <div class="timeline-titre">Ngog Lituba</div>
+              <div class="timeline-texte">Le rocher sacré de Ngog Lituba — lieu de naissance symbolique de l'identité Basa'a.</div>
+            </div>
+            <div class="timeline-point"></div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-point"></div>
+            <div class="timeline-contenu">
+              <div class="timeline-date">Implantation</div>
+              <div class="timeline-titre">Dispersion territoriale</div>
+              <div class="timeline-texte">Les trois branches (Mbene, Mpo'o, Bati) s'établissent sur leurs territoires actuels.</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-contenu">
+              <div class="timeline-date">Organisation</div>
+              <div class="timeline-titre">Société structurée</div>
+              <div class="timeline-texte">Mise en place d'une organisation sociale, spirituelle et économique sophistiquée.</div>
+            </div>
+            <div class="timeline-point"></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Timeline – De Ngog Lituba à aujourd'hui -->
+      <div class="apparition" style="margin-top:5rem;">
+        <h3 class="regions-titre" style="margin-top:0; margin-bottom:3rem;">
+          De <em>Ngog Lituba</em> à aujourd'hui
+        </h3>
+      </div>
+
+      <div class="timeline-conteneur apparition retard-1">
+        <div class="timeline-axe" aria-hidden="true"></div>
+        <div class="timeline-items">
+
+          <div class="timeline-item">
+            <div class="timeline-contenu">
+              <div class="timeline-date">XVIIe–XIXe s.</div>
+              <div class="timeline-titre">Maîtrise du territoire</div>
+              <div class="timeline-texte">Les Basa'a maîtrisent les forêts et les fleuves. Agriculture, chasse, spiritualité s'épanouissent.</div>
+            </div>
+            <div class="timeline-point"></div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-point"></div>
+            <div class="timeline-contenu">
+              <div class="timeline-date">XIXe–XXe s.</div>
+              <div class="timeline-titre">Contact & résistance</div>
+              <div class="timeline-texte">Résistance active à la colonisation allemande puis française. Naissance du mouvement nationaliste.</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-contenu">
+              <div class="timeline-date">1948–1960</div>
+              <div class="timeline-titre">Um Nyobè & l'UPC</div>
+              <div class="timeline-texte">Ruben Um Nyobè, fils Basa'a, mène la lutte pour l'indépendance. Le Cameroun devient libre en 1960.</div>
+            </div>
+            <div class="timeline-point"></div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-point"></div>
+            <div class="timeline-contenu">
+              <div class="timeline-date">Post-indépendance</div>
+              <div class="timeline-titre">Contribution nationale</div>
+              <div class="timeline-texte">Les Basa'a jouent un rôle clé dans la politique, l'économie et la culture du Cameroun moderne.</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-contenu">
+              <div class="timeline-date">Aujourd'hui</div>
+              <div class="timeline-titre">Diaspora mondiale</div>
+              <div class="timeline-texte">La communauté rayonne de Paris à New York, portant un dynamisme économique et intellectuel croissant.</div>
+            </div>
+            <div class="timeline-point"></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Régions actuelles -->
+      <div class="apparition" style="margin-top:5rem;">
+        <h3 class="regions-titre">Régions d'implantation actuelles</h3>
+      </div>
+
+      <div class="regions-grille">
+        <div class="region-carte apparition retard-1">
+          <div class="region-icone">🌊</div>
+          <div class="region-nom">Sanaga-Maritime</div>
+          <div class="region-desc">Berceau historique du peuple Basa'a, entre forêts et fleuves sacrés.</div>
+        </div>
+        <div class="region-carte apparition retard-2">
+          <div class="region-icone">🌿</div>
+          <div class="region-nom">Nyong et Kellé</div>
+          <div class="region-desc">Terres fertiles où les traditions ancestrales perdurent avec vitalité.</div>
+        </div>
+        <div class="region-carte apparition retard-3">
+          <div class="region-icone">🏙️</div>
+          <div class="region-nom">Wouri (Douala)</div>
+          <div class="region-desc">Capitale économique du Cameroun, hub dynamique de la diaspora Basa'a.</div>
+        </div>
+        <div class="region-carte apparition retard-4">
+          <div class="region-icone">🌍</div>
+          <div class="region-nom">Mefou et Akono</div>
+          <div class="region-desc">Région de transition, carrefour entre culture Basa'a et influences urbaines.</div>
+        </div>
+        <div class="region-carte apparition retard-5">
+          <div class="region-icone">✈️</div>
+          <div class="region-nom">Diaspora Mondiale</div>
+          <div class="region-desc">Europe, Amérique, Asie et même Afrique — la communauté Basa'a rayonne partout.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION LA PLATEFORME
+  ============================================================ -->
+  <section id="plateforme" aria-label="Présentation de la plateforme">
+    <div class="conteneur">
+
+      <div class="plateforme-en-tete">
+        <div class="apparition">
+          <div class="etiquette-section">Notre raison d'être</div>
+          <h2 class="titre-section">
+            Une plateforme pour<br><em>l'identité et l'avenir</em>
+          </h2>
+          <div class="separateur"></div>
+          <p class="plateforme-intro">
+            MAHOL MA NKONG est bien plus qu'un portail culturel. C'est un
+            écosystème vivant qui relie les générations, valorise les savoirs
+            ancestraux et bâtit les ponts économiques du futur entre la diaspora
+            Basa'a et les communautés locales.
+          </p>
+          <a href="#contact" class="btn btn-primaire" style="margin-top:1.5rem;">
+            Rejoindre la communauté
+          </a>
+        </div>
+
+        <div class="mvision apparition retard-2">
+          <div class="mvision-bloc">
+            <div class="mvision-titre">🎯 Mission</div>
+            <div class="mvision-texte">
+              Documenter, préserver et transmettre le patrimoine intellectuel,
+              culturel et historique du peuple Basa'a, tout en valorisant
+              ses figures remarquables.
+            </div>
+          </div>
+          <div class="mvision-bloc">
+            <div class="mvision-titre">🔭 Vision</div>
+            <div class="mvision-texte">
+              Devenir la référence mondiale pour la communauté Basa'a —
+              un espace de fierté identitaire et de développement économique
+              partagé.
+            </div>
+          </div>
+          <div class="mvision-bloc">
+            <div class="mvision-titre">⚡ Valeurs</div>
+            <div class="mvision-texte">
+              Unité, excellence, authenticité, solidarité et innovation.
+              Nous portons l'héritage ancien avec des outils modernes.
+            </div>
+          </div>
+          <div class="mvision-bloc">
+            <div class="mvision-titre">🤝 Gouvernance</div>
+            <div class="mvision-texte">
+              Plateforme collaborative pilotée par et pour la communauté,
+              avec transparence et inclusion à tous les niveaux de décision.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cartes objectifs -->
+      <div class="objectifs-grille">
+        <div class="objectif-carte apparition retard-1" data-num="01">
+          <div class="objectif-icone ic-vert">🌿</div>
+          <h3>Mémoire & Patrimoine</h3>
+          <p>
+            Archiver et transmettre l'histoire orale, les traditions, la langue
+            Basa'a et les arts ancestraux aux nouvelles générations, partout
+            dans le monde.
+          </p>
+        </div>
+        <div class="objectif-carte apparition retard-2" data-num="02">
+          <div class="objectif-icone ic-marron">🏛️</div>
+          <h3>Figures Remarquables</h3>
+          <p>
+            Valoriser les personnalités historiques et contemporaines qui
+            incarnent l'excellence et la contribution Basa'a à la société
+            camerounaise et mondiale.
+          </p>
+        </div>
+        <div class="objectif-carte apparition retard-3" data-num="03">
+          <div class="objectif-icone ic-bleu">⚖️</div>
+          <h3>Plaidoyer & Défense</h3>
+          <p>
+            Soutenir et défendre les intérêts du peuple Basa'a dans les
+            sphères politiques, juridiques et institutionnelles, aux niveaux
+            national et international.
+          </p>
+        </div>
+        <div class="objectif-carte apparition retard-4" data-num="04">
+          <div class="objectif-icone ic-or">💼</div>
+          <h3>Écosystème Économique</h3>
+          <p>
+            Connecter diaspora et communautés locales pour créer des synergies :
+            investissements, entrepreneuriat, emploi et co-développement durable.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION HÉRITAGE ET LEADERSHIP
+  ============================================================ -->
+  <section id="figures" aria-label="Héritage et Leadership du peuple Basa'a">
+    <div class="conteneur">
+
+      <div class="apparition">
+        <div class="etiquette-section">Héritage et Leadership</div>
+        <h2 class="titre-section">
+          Héritage & <em>Leadership</em><br>du peuple Basa'a
+        </h2>
+        <div class="separateur"></div>
+        <p class="figure-intro">
+          Rubrique : Héritage et Leadership Basa’a
+          <br><br>
+          Cette rubrique met en lumière la contribution remarquable de la communauté Basa’a au développement du Cameroun, de l’Afrique et du monde, en tissant un lien vivant entre les figures historiques qui ont façonné son leadership et les talents contemporains qui en perpétuent l’excellence. À travers des portraits inspirants, des récits d’impact et des initiatives concrètes, elle vise à valoriser cet héritage, à renforcer les connexions entre les membres de la diaspora et du continent, et à encourager des collaborations complémentaires fondées sur nos valeurs communes. Plus qu’un espace de mémoire, c’est une plateforme d’engagement tournée vers l’action, au service d’un renouveau Basa’a ambitieux, solidaire et résolument orienté vers une prospérité partagée.
+        </p>
+        <p class="figure-lien">
+          <a href="recherche-profils.html" class="btn btn-primaire">Accéder à l’interface de filtrage des profils</a>
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION CONTACT
+  ============================================================ -->
+  <section id="contact" aria-label="Contact">
+    <div class="conteneur">
+
+      <div class="contact-grille">
+        <!-- Infos de contact -->
+        <div class="apparition">
+          <div class="etiquette-section">Nous contacter</div>
+          <h2 class="titre-section">
+            Rejoignez<br><em>la communauté</em>
+          </h2>
+          <div class="separateur"></div>
+
+          <div class="contact-info">
+            <h3>Ensemble, préservons et bâtissons</h3>
+            <p>
+              Que vous soyez membre de la communauté Basa'a, de la diaspora,
+              chercheur, partenaire économique ou simplement passionné par notre
+              culture — nous sommes ouverts à tous les échanges.
+            </p>
+          </div>
+
+          <div class="liens-contact">
+            <a href="mailto:contact@mahol-ma-nkong.org" class="lien-contact">
+              <div class="lien-icone li-vert">✉️</div>
+              <span>contact@mahol-ma-nkong.org</span>
+            </a>
+            <a href="https://wa.me/237XXXXXXXXX" class="lien-contact" target="_blank" rel="noopener">
+              <div class="lien-icone li-wa">💬</div>
+              <span>WhatsApp – Rejoindre le groupe</span>
+            </a>
+            <a href="#" class="lien-contact">
+              <div class="lien-icone li-fb">📘</div>
+              <span>Facebook : Mahol Ma Nkong</span>
+            </a>
+            <a href="#" class="lien-contact">
+              <div class="lien-icone li-bleu">📸</div>
+              <span>Instagram : @mahol_ma_nkong</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Formulaire de contact -->
+        <div class="apparition retard-2">
+          <form class="formulaire" id="formulaireContact" novalidate>
+
+            <div class="form-ligne">
+              <div class="form-groupe">
+                <label for="prenom">Prénom *</label>
+                <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required />
+              </div>
+              <div class="form-groupe">
+                <label for="nom">Nom *</label>
+                <input type="text" id="nom" name="nom" placeholder="Votre nom" required />
+              </div>
+            </div>
+
+            <div class="form-groupe">
+              <label for="email">Adresse email *</label>
+              <input type="email" id="email" name="email" placeholder="votre@email.com" required />
+            </div>
+
+            <div class="form-ligne">
+              <div class="form-groupe">
+                <label for="sujet">Sujet</label>
+                <select id="sujet" name="sujet">
+                  <option value="">Choisir un sujet</option>
+                  <option value="culture">Patrimoine culturel</option>
+                  <option value="economie">Partenariat économique</option>
+                  <option value="figure">Proposer une personnalité</option>
+                  <option value="histoire">Recherche historique</option>
+                  <option value="media">Médias & Presse</option>
+                  <option value="autre">Autre</option>
+                </select>
+              </div>
+              <div class="form-groupe">
+                <label for="pays">Pays de résidence</label>
+                <input type="text" id="pays" name="pays" placeholder="Ex : France, Cameroun…" />
+              </div>
+            </div>
+
+            <div class="form-groupe">
+              <label for="message">Votre message *</label>
+              <textarea id="message" name="message" placeholder="Écrivez votre message ici…" required></textarea>
+            </div>
+
+            <div class="message-succes" id="messageSucces" role="alert">
+              ✅ Merci ! Votre message a bien été envoyé. Nous vous répondrons dans les meilleurs délais.
+            </div>
+
+            <button type="submit" class="btn btn-vert">
+              Envoyer le message →
+            </button>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PIED DE PAGE
+  ============================================================ -->
+  <footer>
+    <div class="conteneur footer-grille" role="contentinfo">
+
+      <!-- Marque -->
+      <div class="footer-marque">
+        <div class="footer-marque-nom">MAHOL MA NKONG</div>
+        <p>
+          Plateforme culturelle et économique du peuple Basa'a.
+          Mémoire, identité et prospérité pour les générations présentes
+          et futures.
+        </p>
+        <div class="reseaux-sociaux">
+          <a href="#" class="lien-social" aria-label="Facebook">f</a>
+          <a href="#" class="lien-social" aria-label="Instagram">📷</a>
+          <a href="#" class="lien-social" aria-label="YouTube">▶</a>
+          <a href="#" class="lien-social" aria-label="LinkedIn">in</a>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#accueil">Accueil</a></li>
+          <li><a href="#histoire">Notre Histoire</a></li>
+          <li><a href="#plateforme">La Plateforme</a></li>
+          <li><a href="#figures">Personnalités</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- À venir -->
+      <div class="footer-col">
+        <h4>À venir</h4>
+        <ul>
+          <li><a href="#">Marketplace culturelle</a></li>
+          <li><a href="#">Réseau d'entrepreneurs</a></li>
+          <li><a href="#">Bibliothèque numérique</a></li>
+          <li><a href="#">Événements & Festivals</a></li>
+          <li><a href="#">Espace membres</a></li>
+        </ul>
+      </div>
+
+      <!-- Communauté -->
+      <div class="footer-col">
+        <h4>Communauté</h4>
+        <ul>
+          <li><a href="#">Groupe WhatsApp</a></li>
+          <li><a href="#">Forum Basa'a</a></li>
+          <li><a href="#">Proposer un profil</a></li>
+          <li><a href="#">Nous soutenir</a></li>
+          <li><a href="#">Politique de confidentialité</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="conteneur footer-bas">
+      <span>© 2025 MAHOL MA NKONG – Tous droits réservés</span>
+      <span>Fait avec ❤️ pour le peuple Basa'a</span>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       BOUTON WHATSAPP FLOTTANT
+  ============================================================ -->
+  <a
+    href="https://wa.me/237XXXXXXXXX"
+    class="whatsapp-flottant"
+    target="_blank"
+    rel="noopener"
+    aria-label="Nous contacter sur WhatsApp"
+  >
+    <span class="wa-icone" aria-hidden="true">
+      <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <path fill="currentColor" d="M380.9 97.1C339 55.1 285.6 32 229.7 32 117.1 32 25.7 123.3 25.7 235.5c0 41.4 11 81.7 31.9 116.7L0 480l132.4-34.8A15.8 15.8 0 00143.9 430l-7.5-30.7c14.3-8.3 26.9-19.1 37.8-31.9 4.1-5 8.5-7.6 14-8.5 6.1-.9 12.2-.8 18.3-.1 20.4 2.0 40.2 12.6 57.4 29.8 36.6 36.6 50.7 82.7 50.2 139.7-.1 2.3-.1 4.7-.1 7.0 0 12.7 10.3 23 23 23h.1c18.4 0 34.1-7.4 45.8-21.3 18.5-22.9 26.5-49.6 26.5-79.3 0-72.9-40.3-141.1-103.7-176.0 10.1-33.5 13.7-68.3 10.6-104.0-1.9-17.8-5.8-35-11.2-51.5zM320.4 341.8c-2.4 6.8-8.0 10.3-14.8 13.3-7.1 3.0-19.1 5.1-28.1 5.8-7.7.6-15.4.4-23.1-.3-25.5-2.2-50.5-12.1-70.3-28.6-13.4-10.8-22.4-24.0-29.1-39.1-5.5-12.4-8.7-25.3-8.0-38.8.3-6.6 1.5-13.0 4.4-18.8 2.1-4.3 6.6-7.5 11.4-7.4 8.6.2 17.2 4.0 24.8 7.7 3.6 1.7 7.4 3.8 11.3 3.7 3.5-.1 7.2-2.1 10.3-4.5 3.8-3.1 7.9-5.9 11.2-9.3 4.3-4.6 7.8-10.1 10.6-15.9 1.7-3.5 1.8-5.4-.8-8.2-3.4-3.5-6.6-7.3-9.3-11.4-3.3-5.0-6.5-9.9-10.3-14.5-4.3-5.4-10.1-7.2-16.8-4.8-4.2 1.5-8.3 3.4-12.2 5.7-9.0 5.6-17.5 11.6-26.1 17.6-4.8 3.3-9.5 6.8-14.4 10.1-9.1 6.1-14.5 4.4-16.2-4.3-1.3-7.4-1.7-14.9-1.5-22.4.1-9.4 1.7-18.7 4.8-27.6 5.7-17.9 14.5-33.9 25.8-48.8 14.7-18.5 32.5-33.6 53.6-45.0 20.3-10.9 41.8-18.7 64.6-23.4 7.4-1.5 11.6 1.0 13.8 8.6 1.4 5.1 2.2 10.3 2.5 15.6.3 6.4 0 12.8-.3 19.2-.4 11.7-3.3 23.1-8.9 34.0-3.1 5.6-7.6 11.0-12.6 15.1-5.8 5.3-11.9 6.8-19.6 5.4-5.2-1.0-10.4-2.6-15.6-3.7-2.5-.5-5.2-.3-7.7.1-8.1 1.6-14.6 5.9-19.6 12.1-4.7 5.8-6.5 12.9-6.0 20.6.4 7.1 1.8 14.1 4.9 20.6 5.4 11.5 13.1 21.8 23.2 30.1 13.1 10.7 27.8 17.7 44.9 19.7 4.9.5 9.9.7 14.9.5 11.5-.5 23.1-1.5 34.4-4.7 4.8-1.3 7.2-.8 9.7 3.8 2.8 5.1 5.8 10.1 9.0 14.9 4.0 6.3 7.8 6.5 13 2.7 7.4-5.4 14.5-11.3 20.9-18.6 1.8-2.1 2.8-4.5 2.2-7.4-.5-2.5-1.8-4.5-4.1-5.7z"/>
+      </svg>
+    </span>
+  </a>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    /* ==========================================================
+       DONNÉES JSON – FIGURES REMARQUABLES
+       (Facilement modifiable / extensible)
+    ========================================================== */
+    const figures = [
+      /* ---- FIGURES HISTORIQUES ---- */
+      {
+        id: 1,
+        nom: "Ruben Um Nyobè",
+        metier: "Leader nationaliste & Martyr de l'indépendance",
+        domaine: "politique",
+        categorie: "historique",
+        lieu: "cameroun",
+        lieuLabel: "Bakem, Sanaga-Maritime",
+        description: "Secrétaire général de l'UPC, Um Nyobè a mené la lutte pour l'indépendance du Cameroun. Fils du peuple Basa'a, il reste le symbole le plus puissant de la résistance et de la dignité africaine.",
+        couleurAvatar: "#1a3d2b",
+        initiales: "UN",
+        contact: false
+      },
+      {
+        id: 2,
+        nom: "Manga Bell",
+        metier: "Roi des Douala & Résistant colonial",
+        domaine: "politique",
+        categorie: "historique",
+        lieu: "cameroun",
+        lieuLabel: "Douala, Wouri",
+        description: "Rudolf Duala Manga Bell, chef suprême du peuple Bell, a été pendu par les Allemands en 1914 pour avoir défendu les terres de son peuple. Héros national du Cameroun.",
+        couleurAvatar: "#5a3220",
+        initiales: "MB",
+        contact: false
+      },
+      {
+        id: 3,
+        nom: "Martin Paul Samba",
+        metier: "Chef militaire & Résistant",
+        domaine: "politique",
+        categorie: "historique",
+        lieu: "cameroun",
+        lieuLabel: "Ebolowa, Sud-Cameroun",
+        description: "Officier formé en Allemagne, Martin Paul Samba choisit de résister à la colonisation. Exécuté en 1914, il incarne le courage et la dignité du peuple face à l'oppression.",
+        couleurAvatar: "#2a6080",
+        initiales: "MS",
+        contact: false
+      },
+      {
+        id: 4,
+        nom: "Ngog Lituba",
+        metier: "Site fondateur & Symbole identitaire",
+        domaine: "culture",
+        categorie: "historique",
+        lieu: "cameroun",
+        lieuLabel: "Kellé, Nyong et Kellé",
+        description: "Le rocher sacré de Ngog Lituba est le lieu mythique d'émergence du peuple Basa'a. Centre de pèlerinage et symbole de l'unité culturelle et spirituelle des Basa'a.",
+        couleurAvatar: "#4a8c63",
+        initiales: "NL",
+        contact: false
+      },
+      {
+        id: 5,
+        nom: "Ewondo Biloa",
+        metier: "Sage & Gardien des traditions",
+        domaine: "religion",
+        categorie: "historique",
+        lieu: "cameroun",
+        lieuLabel: "Sanaga-Maritime",
+        description: "Grand sage et dépositaire des traditions orales Basa'a, il a consacré sa vie à la transmission des mythes fondateurs, des rites initiatiques et de la sagesse ancestrale.",
+        couleurAvatar: "#9c6b4e",
+        initiales: "EB",
+        contact: false
+      },
+
+      /* ---- FIGURES CONTEMPORAINES ---- */
+      {
+        id: 6,
+        nom: "Pr. Henriette Ekwe",
+        metier: "Professeure d'Université & Chercheure",
+        domaine: "science",
+        categorie: "contemporain",
+        lieu: "europe",
+        lieuLabel: "Paris, France",
+        description: "Docteure en histoire africaine, spécialisée dans les civilisations bantou. Elle enseigne à l'Université Paris-Sorbonne et publie des travaux de référence sur l'histoire Basa'a.",
+        couleurAvatar: "#1a3d2b",
+        initiales: "HE",
+        contact: true
+      },
+      {
+        id: 7,
+        nom: "Boris Nkemdirim",
+        metier: "Entrepreneur & Fondateur de startup",
+        domaine: "business",
+        categorie: "contemporain",
+        lieu: "europe",
+        lieuLabel: "Londres, Royaume-Uni",
+        description: "Co-fondateur d'une fintech africaine valorisée à plus de 50M€, Boris Nkemdirim est un ambassadeur de l'entrepreneuriat Basa'a à l'échelle internationale.",
+        couleurAvatar: "#245c3e",
+        initiales: "BN",
+        contact: true
+      },
+      {
+        id: 8,
+        nom: "Yves Bibang",
+        metier: "Musicien & Producteur",
+        domaine: "culture",
+        categorie: "contemporain",
+        lieu: "cameroun",
+        lieuLabel: "Douala, Cameroun",
+        description: "Artiste reconnu sur la scène musicale africaine, Yves Bibang fusionne les rythmes Basa'a traditionnels avec les sons contemporains, portant l'identité Basa'a au-delà des frontières.",
+        couleurAvatar: "#2a6080",
+        initiales: "YB",
+        contact: true
+      },
+      {
+        id: 9,
+        nom: "Dr. Cécile Mekongo",
+        metier: "Médecin & Chercheuse en santé publique",
+        domaine: "science",
+        categorie: "contemporain",
+        lieu: "amerique",
+        lieuLabel: "Montréal, Canada",
+        description: "Experte en santé communautaire, Dr. Mekongo travaille sur l'amélioration des systèmes de santé en Afrique centrale. Elle milite pour l'accès aux soins dans les zones rurales Basa'a.",
+        couleurAvatar: "#5a3220",
+        initiales: "CM",
+        contact: true
+      },
+      {
+        id: 10,
+        nom: "Christian Bassomb",
+        metier: "Avocat & Militant des droits humains",
+        domaine: "politique",
+        categorie: "contemporain",
+        lieu: "europe",
+        lieuLabel: "Bruxelles, Belgique",
+        description: "Avocat international, Christian Bassomb défend les droits des communautés africaines devant les instances européennes. Voix forte du plaidoyer pour le peuple Basa'a.",
+        couleurAvatar: "#4a8c63",
+        initiales: "CB",
+        contact: true
+      },
+      {
+        id: 11,
+        nom: "Joëlle Ngom",
+        metier: "Athlète internationale – Sprint",
+        domaine: "sport",
+        categorie: "contemporain",
+        lieu: "afrique",
+        lieuLabel: "Yaoundé, Cameroun",
+        description: "Championne d'Afrique du 100m, Joëlle Ngom représente le Cameroun avec fierté. Ambassadrice de la jeunesse Basa'a, elle inspire des milliers de jeunes athlètes.",
+        couleurAvatar: "#9c6b4e",
+        initiales: "JN",
+        contact: true
+      },
+      {
+        id: 12,
+        nom: "Pascal Ema Ndoumbe",
+        metier: "Ingénieur & Entrepreneur tech",
+        domaine: "science",
+        categorie: "contemporain",
+        lieu: "amerique",
+        lieuLabel: "San Francisco, USA",
+        description: "Ingénieur logiciel chez une grande entreprise de la Silicon Valley, Pascal œuvre à former la prochaine génération d'ingénieurs africains via sa fondation éducative.",
+        couleurAvatar: "#1a3d2b",
+        initiales: "PE",
+        contact: true
+      }
+    ];
+
+    /* ==========================================================
+       ÉTAT GLOBAL DES FILTRES
+    ========================================================== */
+    let etatFiltres = {
+      categorie: 'tous',
+      domaine:   'tous',
+      lieu:      'tous'
+    };
+
+    /* ==========================================================
+       GÉNÉRATION DES CARTES PROFIL
+    ========================================================== */
+    function genererCartesProfil(data) {
+      const grille = document.getElementById('profilsGrille');
+      if (!grille) return;
+      grille.innerHTML = '';
+
+      const filtrees = data.filter(f => {
+        const okCat    = etatFiltres.categorie === 'tous' || f.categorie === etatFiltres.categorie;
+        const okDomaine = etatFiltres.domaine   === 'tous' || f.domaine   === etatFiltres.domaine;
+        const okLieu   = etatFiltres.lieu       === 'tous' || f.lieu      === etatFiltres.lieu;
+        return okCat && okDomaine && okLieu;
+      });
+
+      if (filtrees.length === 0) {
+        grille.innerHTML = `
+          <div class="aucun-resultat">
+            <div class="aucun-resultat-icone">🔍</div>
+            <p>Aucune personnalité ne correspond à vos filtres.</p>
+            <p style="font-size:0.85rem;margin-top:0.5rem;">Essayez d'élargir votre sélection.</p>
+          </div>`;
+        return;
+      }
+
+      filtrees.forEach((f, index) => {
+        const badgeClasse = f.categorie === 'historique' ? 'badge-historique' : 'badge-contemporain';
+        const badgeLabel  = f.categorie === 'historique' ? 'Historique' : 'Contemporain';
+
+        const carte = document.createElement('div');
+        carte.className = 'profil-carte apparition';
+        carte.setAttribute('role', 'listitem');
+        carte.style.transitionDelay = `${(index % 3) * 0.1}s`;
+
+        carte.innerHTML = `
+          <div class="profil-img-conteneur">
+            <!-- Avatar SVG coloré (remplacer par une vraie image si disponible) -->
+            <div class="profil-avatar" style="background: linear-gradient(135deg, ${f.couleurAvatar}, ${f.couleurAvatar}cc);">
+              ${f.initiales}
+            </div>
+            <span class="profil-badge ${badgeClasse}">${badgeLabel}</span>
+          </div>
+          <div class="profil-corps">
+            <div class="profil-nom">${f.nom}</div>
+            <div class="profil-metier">${f.metier}</div>
+            <div class="profil-localisation">
+              <span>📍</span>
+              <span>${f.lieuLabel}</span>
+            </div>
+            <div class="profil-tag">${capitaliserDomaine(f.domaine)}</div>
+            <div class="profil-desc">${f.description}</div>
+            ${f.contact ? `<button class="btn-contact-sm" onclick="alert('Fonctionnalité à venir — Espace membres')">✉ Contacter</button>` : ''}
+          </div>
+        `;
+
+        grille.appendChild(carte);
+
+        // Déclencher animation
+        requestAnimationFrame(() => {
+          setTimeout(() => carte.classList.add('visible'), 50 + index * 80);
+        });
+      });
+    }
+
+    function capitaliserDomaine(domaine) {
+      const labels = {
+        politique: 'Politique',
+        culture:   'Culture & Art',
+        business:  'Business',
+        sport:     'Sport',
+        science:   'Science & Tech',
+        religion:  'Religion'
+      };
+      return labels[domaine] || domaine;
+    }
+
+    /* ==========================================================
+       CHANGEMENT D'ONGLET
+    ========================================================== */
+    function changerOnglet(btn) {
+      document.querySelectorAll('.onglet-btn').forEach(b => {
+        b.classList.remove('actif');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('actif');
+      btn.setAttribute('aria-selected', 'true');
+      etatFiltres.categorie = btn.dataset.categorie;
+      genererCartesProfil(figures);
+    }
+
+    /* ==========================================================
+       FILTRES DOMAINE & LIEU
+    ========================================================== */
+    function filtrerDomaine(btn) {
+      document.querySelectorAll('[data-filtre-domaine]').forEach(b => b.classList.remove('actif'));
+      btn.classList.add('actif');
+      etatFiltres.domaine = btn.dataset.filtreDomaine;
+      genererCartesProfil(figures);
+    }
+
+    function filtrerLieu(btn) {
+      document.querySelectorAll('[data-filtre-lieu]').forEach(b => b.classList.remove('actif'));
+      btn.classList.add('actif');
+      etatFiltres.lieu = btn.dataset.filtreLieu;
+      genererCartesProfil(figures);
+    }
+
+    /* ==========================================================
+       FORMULAIRE DE CONTACT
+    ========================================================== */
+    document.getElementById('formulaireContact').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const prenom  = document.getElementById('prenom').value.trim();
+      const nom     = document.getElementById('nom').value.trim();
+      const email   = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if (!prenom || !nom || !email || !message) {
+        alert('Veuillez remplir tous les champs obligatoires (*).');
+        return;
+      }
+
+      // Simulation d'envoi (à remplacer par une vraie API)
+      const btnSoumettre = this.querySelector('.btn-vert');
+      btnSoumettre.textContent = 'Envoi en cours…';
+      btnSoumettre.disabled = true;
+
+      setTimeout(() => {
+        document.getElementById('messageSucces').style.display = 'block';
+        this.reset();
+        btnSoumettre.textContent = 'Envoyer le message →';
+        btnSoumettre.disabled = false;
+        setTimeout(() => {
+          document.getElementById('messageSucces').style.display = 'none';
+        }, 6000);
+      }, 1200);
+    });
+
+    /* ==========================================================
+       NAVIGATION – DÉFILEMENT & MOBILE
+    ========================================================== */
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('nav');
+      if (window.scrollY > 60) {
+        nav.classList.add('defilé');
+      } else {
+        nav.classList.remove('defilé');
+      }
+    });
+
+    function ouvrirMenuMobile() {
+      document.getElementById('menuMobile').classList.add('ouvert');
+      document.body.style.overflow = 'hidden';
+    }
+    function fermerMenuMobile() {
+      document.getElementById('menuMobile').classList.remove('ouvert');
+      document.body.style.overflow = '';
+    }
+
+    /* ==========================================================
+       PARALLAXE HÉROS (léger)
+    ========================================================== */
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      const fond = document.querySelector('.heros-fond');
+      if (fond) fond.style.transform = `translateY(${y * 0.35}px)`;
+    });
+
+    /* ==========================================================
+       ANIMATIONS AU SCROLL (Intersection Observer)
+    ========================================================== */
+    const observateur = new IntersectionObserver((entrees) => {
+      entrees.forEach(entree => {
+        if (entree.isIntersecting) {
+          entree.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    function attacherObservateur() {
+      document.querySelectorAll('.apparition').forEach(el => {
+        observateur.observe(el);
+      });
+    }
+
+    /* ==========================================================
+       PARTICULES HÉROS
+    ========================================================== */
+    function creerParticules() {
+      const conteneur = document.getElementById('particules');
+      if (!conteneur) return;
+
+      const couleurs = ['#c5dbc9', '#c8dde8', '#e8d5c4', '#ffffff'];
+      const nombre = 18;
+
+      for (let i = 0; i < nombre; i++) {
+        const p = document.createElement('div');
+        p.className = 'particule';
+
+        const taille = Math.random() * 60 + 20;
+        const gauche = Math.random() * 100;
+        const duree  = Math.random() * 25 + 15;
+        const delai  = Math.random() * 20;
+        const couleur = couleurs[Math.floor(Math.random() * couleurs.length)];
+
+        p.style.cssText = `
+          width: ${taille}px;
+          height: ${taille}px;
+          left: ${gauche}%;
+          bottom: -${taille}px;
+          background: ${couleur};
+          animation-duration: ${duree}s;
+          animation-delay: ${delai}s;
+        `;
+        conteneur.appendChild(p);
+      }
+    }
+
+    /* ==========================================================
+       INITIALISATION
+    ========================================================== */
+    document.addEventListener('DOMContentLoaded', () => {
+      genererCartesProfil(figures);
+      creerParticules();
+      attacherObservateur();
+    });
+  </script>
+
+</body>
+</html>

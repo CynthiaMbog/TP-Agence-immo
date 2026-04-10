@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recherche de profils – Héritage & Leadership Basa'a</title>
+  <meta name="description" content="Interface de recherche et de filtrage des profils remarquables du peuple Basa'a." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    :root {
+      --vert-foret: var(--vert);
+      --gris-texte: var(--gris);
+    }
+
+    body {
+      background: var(--creme);
+    }
+
+    #nav {
+      position: sticky;
+      top: 0;
+      background: rgba(245, 240, 232, 0.98);
+      backdrop-filter: blur(12px);
+      padding: 1rem 0;
+      z-index: 100;
+      box-shadow: 0 1px 10px rgba(26, 61, 43, 0.08);
+    }
+
+    .nav-conteneur {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: var(--conteneur-max);
+      margin: 0 auto;
+      padding: 0 2rem;
+      gap: 1rem;
+    }
+
+    .nav-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .nav-brand .logo-nom {
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      color: var(--vert);
+    }
+
+    .nav-brand .logo-sous {
+      font-size: 0.68rem;
+      color: var(--gris);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-actions a {
+      padding: 0.85rem 1.5rem;
+      border-radius: 2px;
+      border: 1.5px solid transparent;
+      background: var(--marron-clair);
+      color: var(--blanc);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: background 0.25s ease;
+    }
+
+    .nav-actions a:hover {
+      background: var(--marron);
+    }
+
+    .page-hero {
+      padding: 7rem 0 3rem;
+      background: linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.92) 100%);
+    }
+
+    .page-hero .section-conteneur {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .intro-bloc {
+      max-width: 62rem;
+    }
+
+    .intro-bloc p,
+    .figure-intro {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--gris);
+      margin-top: 1.5rem;
+    }
+
+    .figure-intro {
+      max-width: 80ch;
+      margin-bottom: 2rem;
+    }
+
+    .apparition {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.75s var(--transition-lente), transform 0.75s var(--transition-lente);
+    }
+
+    .apparition.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .onglets {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid var(--bordure);
+      margin-bottom: 3rem;
+    }
+
+    .onglet-btn {
+      padding: 0.85rem 2.2rem;
+      background: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gris-mid);
+      position: relative;
+      transition: color 0.25s;
+    }
+
+    .onglet-btn::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--marron-clair);
+      transform: scaleX(0);
+      transition: transform 0.35s var(--transition-lente);
+    }
+
+    .onglet-btn.actif {
+      color: var(--vert-foret);
+    }
+
+    .onglet-btn.actif::after {
+      transform: scaleX(1);
+    }
+
+    .barre-filtres {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+      align-items: center;
+    }
+
+    .filtre-groupe {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .filtre-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gris-mid);
+    }
+
+    .filtre-btn {
+      padding: 0.38rem 1rem;
+      background: transparent;
+      border: 1.5px solid var(--bordure);
+      font-family: var(--sans);
+      font-size: 0.73rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--gris-texte);
+      border-radius: 2px;
+      transition: all 0.25s;
+    }
+
+    .filtre-btn:hover,
+    .filtre-btn.actif {
+      background: var(--vert-foret);
+      color: var(--blanc);
+      border-color: var(--vert-foret);
+    }
+
+    .profil-grille {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 2rem;
+    }
+
+    .profil-carte {
+      background: var(--blanc);
+      border: 1px solid var(--bordure);
+      overflow: hidden;
+      transition: transform 0.4s var(--transition-lente), box-shadow 0.4s;
+      position: relative;
+    }
+
+    .profil-carte:hover {
+      transform: translateY(-7px);
+      box-shadow: var(--ombre-forte);
+    }
+
+    .profil-img-conteneur {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 3 / 3.4;
+      background: linear-gradient(135deg, var(--vert-pale), var(--bleu-pale));
+    }
+
+    .profil-avatar {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 4rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .profil-badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      padding: 0.28rem 0.8rem;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      z-index: 1;
+      border-radius: 2px;
+    }
+
+    .badge-historique { background: var(--marron-clair); color: var(--blanc); }
+    .badge-contemporain { background: var(--vert-foret); color: var(--blanc); }
+
+    .profil-corps {
+      padding: 1.6rem;
+    }
+
+    .profil-nom {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--vert-foret);
+      margin-bottom: 0.25rem;
+    }
+
+    .profil-metier {
+      font-size: 0.78rem;
+      color: var(--marron-clair);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.4rem;
+    }
+
+    .profil-localisation {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.75rem;
+      color: var(--gris-mid);
+      margin-bottom: 0.8rem;
+    }
+
+    .profil-tag {
+      display: inline-block;
+      padding: 0.2rem 0.65rem;
+      background: var(--vert-pale);
+      color: var(--vert-foret);
+      font-size: 0.63rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      margin-bottom: 0.9rem;
+    }
+
+    .profil-desc {
+      font-size: 0.84rem;
+      color: var(--gris-mid);
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: 1.3rem;
+    }
+
+    .resultats-info {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      margin: 2rem 0 1rem;
+      flex-wrap: wrap;
+    }
+
+    .resultats-info strong {
+      color: var(--vert);
+    }
+
+    .aucun-resultat {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 5rem 2rem;
+      color: var(--gris-mid);
+    }
+
+    .aucun-resultat-icone {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-legal {
+      margin: 4rem auto 2rem;
+      padding: 2rem 0;
+      max-width: var(--conteneur-max);
+      text-align: center;
+      color: var(--gris);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 1024px) {
+      .profil-grille {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav-conteneur,
+      .page-hero .section-conteneur {
+        padding: 0 1.5rem;
+      }
+
+      .profil-grille {
+        grid-template-columns: 1fr;
+      }
+
+      .resultats-info {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav id="nav">
+    <div class="nav-conteneur">
+      <div>
+        <div class="logo-nom">MAHOL MA NKONG</div>
+        <div class="logo-sous">Recherche de profils</div>
+      </div>
+      <a href="index.html" class="btn btn-principal">Retour au site</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="recherche" aria-label="Recherche de profils">
+      <div class="conteneur">
+        <div class="etiquette-section">Héritage & Leadership</div>
+        <h2 class="titre-section">Interface de filtrage des profils</h2>
+        <div class="separateur"></div>
+        <p class="figure-intro">
+          Découvrez les figures historiques et contemporaines du peuple Basa'a grâce à une interface de filtrage claire et élégante. Sélectionnez une catégorie, un domaine ou un lieu pour identifier rapidement les profils qui incarnent l’héritage et le leadership de la communauté.
+        </p>
+
+        <div class="barre-filtres" aria-label="Recherche et filtres">
+          <div class="filtre-groupe" style="flex:1; min-width:240px;">
+            <label for="champRecherche" class="filtre-label" style="margin-bottom:0.5rem; display:block;">Recherche</label>
+            <input id="champRecherche" class="champ-recherche" type="search" placeholder="Nom, rôle ou localisation" aria-label="Recherche par nom, rôle ou localisation" />
+          </div>
+          <div class="filtre-groupe">
+            <span class="filtre-label">Catégorie :</span>
+            <button class="filtre-btn actif" data-categorie="tous" type="button">Tous</button>
+            <button class="filtre-btn" data-categorie="historique" type="button">Historique</button>
+            <button class="filtre-btn" data-categorie="contemporain" type="button">Contemporain</button>
+          </div>
+        </div>
+
+        <div class="barre-filtres" aria-label="Filtres par domaine et lieu">
+          <div class="filtre-groupe">
+            <span class="filtre-label">Domaine :</span>
+            <button class="filtre-btn actif" data-filtre-domaine="tous" type="button">Tous</button>
+            <button class="filtre-btn" data-filtre-domaine="politique" type="button">Politique</button>
+            <button class="filtre-btn" data-filtre-domaine="culture" type="button">Culture & Art</button>
+            <button class="filtre-btn" data-filtre-domaine="business" type="button">Business</button>
+            <button class="filtre-btn" data-filtre-domaine="sport" type="button">Sport</button>
+            <button class="filtre-btn" data-filtre-domaine="education" type="button">Éducation</button>
+            <button class="filtre-btn" data-filtre-domaine="tech" type="button">Science & Tech</button>
+            <button class="filtre-btn" data-filtre-domaine="religion" type="button">Religion & Spiritualité</button>
+          </div>
+          <div class="filtre-groupe" style="margin-left:auto;">
+            <span class="filtre-label">Lieu :</span>
+            <button class="filtre-btn actif" data-filtre-lieu="tous" type="button">Tous</button>
+            <button class="filtre-btn" data-filtre-lieu="cameroun" type="button">Cameroun</button>
+            <button class="filtre-btn" data-filtre-lieu="europe" type="button">Europe</button>
+            <button class="filtre-btn" data-filtre-lieu="amerique" type="button">Amérique</button>
+            <button class="filtre-btn" data-filtre-lieu="afrique" type="button">Afrique</button>
+          </div>
+        </div>
+
+        <div class="resultats-info" style="margin-bottom: 2rem; display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
+          <div id="resultatsTexte"><strong>0</strong> profils trouvés</div>
+          <div id="activeFiltres" style="color: var(--gris-mid);"></div>
+        </div>
+
+        <div class="profil-grille" id="profilsGrille" role="list" aria-label="Liste des profils"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer-legal">
+    © 2026 MAHOL MA NKONG – Recherche de profils Basa'a
+  </footer>
+
+  <script>
+    const figures = [
+      {
+        id: 1,
+        categorie: 'historique',
+        nom: 'Ruben Um Nyobè',
+        role: 'Résistant & Père de l\'indépendance',
+        domaine: 'politique',
+        lieu: 'cameroun',
+        lieuAffiche: 'Boumnyebel, Cameroun',
+        description: 'Secrétaire général de l\'UPC et figure emblématique de la résistance à la colonisation française.',
+        couleurAvatar: '#1a3d2b',
+        initiales: 'RU'
+      },
+      {
+        id: 2,
+        categorie: 'historique',
+        nom: 'Manga Bell',
+        role: 'Chef traditionnel & Résistant',
+        domaine: 'politique',
+        lieu: 'cameroun',
+        lieuAffiche: 'Douala, Cameroun',
+        description: 'Chef des Basa\'a côtiers à Douala, il résista courageusement aux expropriations coloniales allemandes.',
+        couleurAvatar: '#5a3220',
+        initiales: 'MB'
+      },
+      {
+        id: 3,
+        categorie: 'historique',
+        nom: 'Moumié Félix-Roland',
+        role: 'Dirigeant politique & Militant',
+        domaine: 'politique',
+        lieu: 'cameroun',
+        lieuAffiche: 'Cameroun',
+        description: 'Président de l\'UPC et défenseur de l\'indépendance complète du Cameroun.',
+        couleurAvatar: '#2a6080',
+        initiales: 'MF'
+      },
+      {
+        id: 4,
+        categorie: 'historique',
+        nom: 'Henriette Ekué',
+        role: 'Militante & Héroïne nationale',
+        domaine: 'culture',
+        lieu: 'cameroun',
+        lieuAffiche: 'Littoral, Cameroun',
+        description: 'Femme engagée dans la résistance Basa\'a, portant la cause de son peuple avec courage.',
+        couleurAvatar: '#4a8c63',
+        initiales: 'HE'
+      },
+      {
+        id: 5,
+        categorie: 'contemporain',
+        nom: 'Dr. Amara Bassa',
+        role: 'Chirurgien & Philanthrope',
+        domaine: 'education',
+        lieu: 'france',
+        lieuAffiche: 'Paris, France',
+        description: 'Chirurgien cardiologue international, fondateur d\'une ONG formant des médecins au Cameroun.',
+        couleurAvatar: '#1a3d2b',
+        initiales: 'AB'
+      },
+      {
+        id: 6,
+        categorie: 'contemporain',
+        nom: 'Sandra Nkong',
+        role: 'Fondatrice de startup & Investisseur',
+        domaine: 'business',
+        lieu: 'usa',
+        lieuAffiche: 'New York, USA',
+        description: 'Fondatrice d\'une fintech africaine valorisée à 50M$, elle investit dans les start-ups camerounaises.',
+        couleurAvatar: '#9c6b4e',
+        initiales: 'SN'
+      },
+      {
+        id: 7,
+        categorie: 'contemporain',
+        nom: 'Patrick Mpoo',
+        role: 'Ingénieur & Entrepreneur Tech',
+        domaine: 'tech',
+        lieu: 'europe',
+        lieuAffiche: 'Berlin, Allemagne',
+        description: 'Ingénieur en intelligence artificielle, initiateur du programme Code Basa\'a pour les jeunes.',
+        couleurAvatar: '#2a6080',
+        initiales: 'PM'
+      },
+      {
+        id: 8,
+        categorie: 'contemporain',
+        nom: 'Pasteur Jean Mbene',
+        role: 'Leader spirituel & Bâtisseur social',
+        domaine: 'religion',
+        lieu: 'cameroun',
+        lieuAffiche: 'Edéa, Cameroun',
+        description: 'Fondateur d\'une école bilingue et d\'un centre de santé servant des milliers de familles.',
+        couleurAvatar: '#5a3220',
+        initiales: 'JM'
+      },
+      {
+        id: 9,
+        categorie: 'contemporain',
+        nom: 'Céline Bati-Nguena',
+        role: 'Architecte & Directrice culturelle',
+        domaine: 'culture',
+        lieu: 'france',
+        lieuAffiche: 'Lyon, France',
+        description: 'Directrice du festival Racines Basa\'a, elle promeut l\'identité artistique en Europe.',
+        couleurAvatar: '#4a8c63',
+        initiales: 'CB'
+      },
+      {
+        id: 10,
+        categorie: 'contemporain',
+        nom: 'Martin Njock',
+        role: 'Député & Juriste',
+        domaine: 'politique',
+        lieu: 'cameroun',
+        lieuAffiche: 'Yaoundé, Cameroun',
+        description: 'Député et docteur en droit international, défenseur des droits fonciers Basa\'a.',
+        couleurAvatar: '#1a3d2b',
+        initiales: 'MN'
+      },
+      {
+        id: 11,
+        categorie: 'contemporain',
+        nom: 'Aline Nkeng',
+        role: 'Chercheuse & Linguiste',
+        domaine: 'education',
+        lieu: 'europe',
+        lieuAffiche: 'Genève, Suisse',
+        description: 'Docteure en linguistique africaine, elle coordonne le dictionnaire numérique Basa\'a.',
+        couleurAvatar: '#9c6b4e',
+        initiales: 'AN'
+      },
+      {
+        id: 12,
+        categorie: 'contemporain',
+        nom: 'Eric Mpoo-Ngog',
+        role: 'PDG & Entrepreneur agricole',
+        domaine: 'business',
+        lieu: 'cameroun',
+        lieuAffiche: 'Douala, Cameroun',
+        description: 'Fondateur d\'un groupe agro-industriel transformant le manioc et le plantain.',
+        couleurAvatar: '#9c6b4e',
+        initiales: 'EM'
+      }
+    ];
+
+    const etat = {
+      categorie: 'tous',
+      domaine: 'tous',
+      lieu: 'tous',
+      recherche: ''
+    };
+
+    const resultatsTexte = document.getElementById('resultatsTexte');
+    const champRecherche = document.getElementById('champRecherche');
+    const boutonsCategorie = document.querySelectorAll('.onglet-btn');
+    const boutonsDomaine = document.querySelectorAll('[data-filtre-domaine]');
+    const boutonsLieu = document.querySelectorAll('[data-filtre-lieu]');
+    const grilleProfils = document.getElementById('profilsGrille');
+
+    document.addEventListener('DOMContentLoaded', () => {
+      boutonsCategorie.forEach(btn => btn.addEventListener('click', () => changerOnglet(btn)));
+      boutonsDomaine.forEach(btn => btn.addEventListener('click', () => filtrerDomaine(btn)));
+      boutonsLieu.forEach(btn => btn.addEventListener('click', () => filtrerLieu(btn)));
+      champRecherche.addEventListener('input', () => {
+        etat.recherche = champRecherche.value.trim().toLowerCase();
+        renderProfils();
+      });
+      renderProfils();
+    });
+
+    function changerOnglet(btn) {
+      boutonsCategorie.forEach(b => b.classList.remove('actif'));
+      btn.classList.add('actif');
+      etat.categorie = btn.dataset.categorie;
+      renderProfils();
+    }
+
+    function filtrerDomaine(btn) {
+      boutonsDomaine.forEach(b => b.classList.remove('actif'));
+      btn.classList.add('actif');
+      etat.domaine = btn.dataset.filtreDomaine;
+      renderProfils();
+    }
+
+    function filtrerLieu(btn) {
+      boutonsLieu.forEach(b => b.classList.remove('actif'));
+      btn.classList.add('actif');
+      etat.lieu = btn.dataset.filtreLieu;
+      renderProfils();
+    }
+
+    function renderProfils() {
+      const filtres = figures.filter(f => {
+        const catOk = etat.categorie === 'tous' || f.categorie === etat.categorie;
+        const domaineOk = etat.domaine === 'tous' || f.domaine === etat.domaine;
+        const lieuOk = etat.lieu === 'tous' || f.lieu === etat.lieu;
+        const rechercheOk = etat.recherche === '' || [f.nom, f.role, f.lieuAffiche, capitaliserDomaine(f.domaine)]
+          .some(val => val.toLowerCase().includes(etat.recherche));
+        return catOk && domaineOk && lieuOk && rechercheOk;
+      });
+
+      resultatsTexte.innerHTML = `<strong>${filtres.length}</strong> profils trouvés`;
+      grilleProfils.innerHTML = '';
+
+      if (!filtres.length) {
+        grilleProfils.innerHTML = '<div class="aucun-resultat"><div class="aucun-resultat-icone">🔍</div><p>Aucun profil ne correspond à cette sélection.</p></div>';
+        return;
+      }
+
+      filtres.forEach((f, index) => {
+        const carte = document.createElement('article');
+        carte.className = 'profil-carte apparition';
+        carte.style.transitionDelay = `${index * 0.05}s`;
+        const badgeClasse = f.categorie === 'historique' ? 'badge-historique' : 'badge-contemporain';
+        const badgeLabel = f.categorie === 'historique' ? 'Historique' : 'Contemporain';
+
+        carte.innerHTML = `
+          <div class="profil-img-conteneur">
+            <div class="profil-avatar" style="background: linear-gradient(135deg, ${f.couleurAvatar}, ${f.couleurAvatar}cc);">${f.initiales}</div>
+            <span class="profil-badge ${badgeClasse}">${badgeLabel}</span>
+          </div>
+          <div class="profil-corps">
+            <div class="profil-nom">${f.nom}</div>
+            <div class="profil-metier">${f.role}</div>
+            <div class="profil-localisation"><span>📍</span><span>${f.lieuAffiche}</span></div>
+            <div class="profil-tag">${capitaliserDomaine(f.domaine)}</div>
+            <div class="profil-desc">${f.description}</div>
+          </div>`;
+
+        grilleProfils.appendChild(carte);
+        requestAnimationFrame(() => carte.classList.add('visible'));
+      });
+    }
+
+    function capitaliserDomaine(domaine) {
+      const labels = {
+        politique: 'Politique',
+        culture: 'Culture & Art',
+        business: 'Business',
+        sport: 'Sport',
+        education: 'Éducation',
+        tech: 'Science & Tech',
+        religion: 'Religion & Spiritualité'
+      };
+      return labels[domaine] || domaine;
+    }
+  </script>
+</body>
+</html>
